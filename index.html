@@ -1,19 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ================= ONLY NEW ADDITIONS — SAFE TO MERGE ================= -->
 
-<title>EasyLegalFiling</title>
+<!-- 🔥 ADD THIS RIGHT AFTER <body> -->
+<div id="urgency-bar" style="background:#c0392b;color:#fff;text-align:center;padding:8px;font-weight:700;font-size:13px;">
+⚠️ Deadlines matter. Waiting can hurt your case.
+</div>
+
+
+<!-- 🔥 UPDATE HEADER NAV (REPLACE ONLY NAV SECTION) -->
+<nav class="header-nav">
+  <a class="nav-link" id="nav-services" href="#services">Services</a>
+  <a class="nav-link" id="nav-divorce" href="#divorce-card">Divorce</a>
+  <a class="nav-link" id="nav-estate" href="#estate-card">Estate</a>
+  <a class="nav-link" id="nav-immigration" href="#immigration-card">Immigration</a>
+  <a class="btn-nav-ghost" href="https://wa.me/17186756729" target="_blank">💬 Free Help</a>
+  <a class="btn-nav-cta" href="#services">Get Started →</a>
+</nav>
+
+
+<!-- 🔥 ADD IDS TO EXISTING CARDS (JUST ADD id=) -->
+
+<!-- Immigration -->
+<div class="svc-card urgent reveal" id="immigration-card">
+
+<!-- Divorce -->
+<div class="svc-card reveal reveal-delay-1" id="divorce-card">
+
+<!-- Estate -->
+<div class="svc-card reveal reveal-delay-3" id="estate-card">
+
+
+<!-- 🔥 ADD THIS BEFORE </body> -->
+
+<!-- STICKY CTA -->
+<a id="sticky-cta" class="sticky-cta"></a>
 
 <style>
-html { scroll-behavior: smooth; }
-body { font-family: Arial; margin:0; }
-
-/* NAV ACTIVE */
-.nav-link.active { color:#4b2aad; font-weight:700; }
-
-/* STICKY CTA */
 .sticky-cta {
   position: fixed;
   bottom: 20px;
@@ -30,61 +51,34 @@ body { font-family: Arial; margin:0; }
   display: none;
 }
 </style>
-</head>
 
-<body>
 
-<!-- HEADER -->
-<nav style="position:fixed;top:0;width:100%;background:#fff;padding:15px;z-index:1000">
-  <a class="nav-link" id="nav-services" href="#services">Services</a>
-  <a class="nav-link" id="nav-divorce" href="#divorce-card">Divorce</a>
-  <a class="nav-link" id="nav-estate" href="#estate-card">Estate</a>
-  <a class="nav-link" id="nav-immigration" href="#immigration-card">Immigration</a>
-</nav>
+<!-- 🔥 LIVE POPUP -->
+<div id="live-popup" style="position:fixed;bottom:90px;left:20px;background:#111;color:#fff;padding:12px 16px;border-radius:8px;font-size:13px;display:none;z-index:999;"></div>
 
-<div style="height:80px"></div>
 
-<!-- SERVICES -->
-<section id="services" style="padding:100px 20px;background:#f5f5f5">
-  <h1>Find Your Legal Solution</h1>
-</section>
+<!-- 🔥 EXIT POPUP -->
+<div id="exit-popup" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:1000;">
+  <div style="background:#fff;padding:30px;border-radius:10px;max-width:400px;text-align:center">
+    <h2 style="color:#c0392b">WAIT — Don't Risk Your Case</h2>
+    <p>You may lose important rights if you leave now. Finish your filing now.</p>
+    <a href="#services" style="background:#F45A27;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:700;">Finish My Case →</a>
+  </div>
+</div>
 
-<!-- IMMIGRATION -->
-<section id="immigration-card" style="padding:120px 20px">
-  <h2>Immigration Court Relief</h2>
-  <a href="https://easydivorcefiling.gavel.io/portal/bundles/0e91b989-bf1a-42b2-b972-3d32faa7f1e7">Start Immigration Case</a>
-</section>
-
-<!-- DIVORCE -->
-<section id="divorce-card" style="padding:120px 20px;background:#f9f9f9">
-  <h2>Divorce Filing</h2>
-  <a href="https://easydivorcefiling.gavel.io/portal/bundles/ea88bd85-278e-47bd-a6b5-4b9ca0890a32">Start Divorce</a>
-</section>
-
-<!-- ESTATE -->
-<section id="estate-card" style="padding:120px 20px">
-  <h2>Estate & Inheritance</h2>
-  <a href="https://easydivorcefiling.gavel.io/portal/bundles/f43856a4-c2b5-47ef-bd49-b265fa666d92">Start Estate Case</a>
-</section>
-
-<!-- STICKY BUTTON -->
-<a id="sticky-cta" class="sticky-cta">Start Now →</a>
 
 <script>
+// 🔥 AUTO NAV + STICKY CTA
 const sections = [
-  { id: "services", nav: "nav-services", link: "#services" },
-  { id: "divorce-card", nav: "nav-divorce", link: "https://easydivorcefiling.gavel.io/portal/bundles/ea88bd85-278e-47bd-a6b5-4b9ca0890a32" },
-  { id: "estate-card", nav: "nav-estate", link: "https://easydivorcefiling.gavel.io/portal/bundles/f43856a4-c2b5-47ef-bd49-b265fa666d92" },
-  { id: "immigration-card", nav: "nav-immigration", link: "https://easydivorcefiling.gavel.io/portal/bundles/0e91b989-bf1a-42b2-b972-3d32faa7f1e7" }
+  { id: "divorce-card", nav: "nav-divorce", link: "https://easydivorcefiling.gavel.io/portal/bundles/ea88bd85-278e-47bd-a6b5-4b9ca0890a32", text: "Start Divorce Now →" },
+  { id: "estate-card", nav: "nav-estate", link: "https://easydivorcefiling.gavel.io/portal/bundles/f43856a4-c2b5-47ef-bd49-b265fa666d92", text: "Protect My Assets Now →" },
+  { id: "immigration-card", nav: "nav-immigration", link: "https://easydivorcefiling.gavel.io/portal/bundles/0e91b989-bf1a-42b2-b972-3d32faa7f1e7", text: "Reopen Case Now →" }
 ];
 
 const sticky = document.getElementById("sticky-cta");
 
 function clearActive() {
-  sections.forEach(s => {
-    const el = document.getElementById(s.nav);
-    if (el) el.classList.remove("active");
-  });
+  document.querySelectorAll(".nav-link").forEach(n => n.classList.remove("active"));
 }
 
 window.addEventListener("scroll", () => {
@@ -95,25 +89,44 @@ window.addEventListener("scroll", () => {
     if (!el) return;
 
     const rect = el.getBoundingClientRect();
-
-    if (rect.top <= 150 && rect.bottom >= 150) {
-      current = section;
-    }
+    if (rect.top <= 150 && rect.bottom >= 150) current = section;
   });
 
   if (current) {
     clearActive();
-
-    const activeNav = document.getElementById(current.nav);
-    if (activeNav) activeNav.classList.add("active");
+    document.getElementById(current.nav)?.classList.add("active");
 
     sticky.style.display = "block";
     sticky.href = current.link;
+    sticky.innerText = current.text;
   } else {
     sticky.style.display = "none";
   }
 });
-</script>
 
-</body>
-</html>
+
+// 🔥 LIVE ACTIVITY
+const messages = [
+"Someone just reopened their immigration case",
+"A user just filed for divorce",
+"Someone checked inheritance rights",
+"A case was just submitted"
+];
+
+setInterval(() => {
+  const popup = document.getElementById("live-popup");
+  popup.innerText = messages[Math.floor(Math.random() * messages.length)];
+  popup.style.display = "block";
+  setTimeout(() => popup.style.display = "none", 4000);
+}, 9000);
+
+
+// 🔥 EXIT INTENT
+let shown = false;
+document.addEventListener("mouseleave", function(e) {
+  if (e.clientY < 10 && !shown) {
+    document.getElementById("exit-popup").style.display = "flex";
+    shown = true;
+  }
+});
+</script>
